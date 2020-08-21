@@ -5,21 +5,21 @@ var isDownArrowPressed = false;
 
 document.onkeydown = function(event){
     switch (event.code){
-        case "ArrowRight":
-            isRightArrowPressed = true;
-            horizontalSpeed = playerSpeed;
-            break;
-        case "ArrowLeft":
-            isLeftArrowPressed = true;
-            horizontalSpeed = -playerSpeed;
-            break;
-        case "ArrowUp":
+        case "KeyW":
             isUpArrowPressed = true;
             verticalSpeed = -playerSpeed;
             break;
-        case "ArrowDown":
+        case "KeyA":
+            isLeftArrowPressed = true;
+            horizontalSpeed = -playerSpeed;
+            break;
+        case "KeyS":
             isDownArrowPressed = true;
             verticalSpeed = playerSpeed;
+            break;
+        case "KeyD":
+            isRightArrowPressed = true;
+            horizontalSpeed = playerSpeed;
             break;
         case "KeyR":
             if (gameOver){
@@ -31,23 +31,7 @@ document.onkeydown = function(event){
 
 document.onkeyup = function(event){
     switch (event.code){
-        case "ArrowRight":
-            isRightArrowPressed = false;
-            if (isLeftArrowPressed){
-                horizontalSpeed = -playerSpeed;
-            } else {
-                horizontalSpeed = 0;
-            }
-            break;
-        case "ArrowLeft":
-            isLeftArrowPressed = false;
-            if (isRightArrowPressed){
-                horizontalSpeed = playerSpeed;
-            } else {
-                horizontalSpeed = 0;
-            }
-            break;
-        case "ArrowUp":
+        case "KeyW":
             isUpArrowPressed = false;
             if (isDownArrowPressed){
                 verticalSpeed = playerSpeed;
@@ -55,12 +39,28 @@ document.onkeyup = function(event){
                 verticalSpeed = 0;
             }
             break;
-        case "ArrowDown":
+        case "KeyA":
+            isLeftArrowPressed = false;
+            if (isRightArrowPressed){
+                horizontalSpeed = playerSpeed;
+            } else {
+                horizontalSpeed = 0;
+            }
+            break;
+        case "KeyS":
             isDownArrowPressed = false;
             if (isUpArrowPressed){
                 verticalSpeed = +playerSpeed;
             } else {
                 verticalSpeed = 0;
+            }
+            break;
+        case "KeyD":
+            isRightArrowPressed = false;
+            if (isLeftArrowPressed){
+                horizontalSpeed = -playerSpeed;
+            } else {
+                horizontalSpeed = 0;
             }
             break;
     }

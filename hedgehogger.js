@@ -1,7 +1,9 @@
-const canvasWidth = 1000;
-const canvasHeight = 500;
-const minSpeed = 2;
-const maxSpeed = 10;
+var scale = 0.8;
+var canvasWidth = 1000;
+var canvasHeight = 500;
+var timerHeight = 30;
+var minSpeed = 2;
+var maxSpeed = 10;
 var gameScreen;
 var timerProgress;
 var secondsRemaining = 0;
@@ -36,6 +38,18 @@ function GetRandomValue(minValue, maxValue){
         return minValue;
     } else {
         return returnValue;
+    }
+}
+
+function SetScale(object, width, height, scale){
+    if (scale<=0) return;
+    if (width>=0){
+        object.width = Math.floor(width * scale);
+        object.style.width = Math.floor(width * scale) + "px";
+    }
+    if (height>=0){
+        object.height = Math.floor(height * scale);
+        object.style.height = Math.floor(height * scale) + "px";    
     }
 }
 
@@ -103,7 +117,11 @@ function Step(){
 
 function StartGame(){
     let gameCanvas = document.getElementById("gameCanvas");
+    SetScale(gameCanvas, canvasWidth, canvasHeight, scale);
     gameScreen = gameCanvas.getContext("2d");
+    gameScreen.scale(scale,scale)
+    let timer = document.getElementById("timer")
+    SetScale(timer, canvasWidth, timerHeight, scale);
     timerProgress = document.getElementById("timerProgress");
     backgroundImage.src = "images/background.png";
     PopulateObsticles();
